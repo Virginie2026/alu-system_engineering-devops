@@ -9,10 +9,7 @@ echo "Holberton School for the win!" > /var/www/html/index.html
 # Add the 301 redirection right after the "server_name _;" line
 # (only if it is not already there)
 if ! grep -q "redirect_me" /etc/nginx/sites-available/default; then
-    sed -i '/server_name _;/a\
-\tlocation /redirect_me {\
-\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\
-\t}' /etc/nginx/sites-available/default
+    sed -i '/server_name _;/a location /redirect_me { return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4; }' /etc/nginx/sites-available/default
 fi
 
 # Restart Nginx without systemctl
