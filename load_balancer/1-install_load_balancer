@@ -3,6 +3,11 @@
 apt-get update -y
 apt-get install -y haproxy
 sudo sed -i 's/^ENABLED=.*/ENABLED=1/' /etc/default/haproxy
+
+# Add servers to /etc/hosts so HAProxy can resolve web-01 and web-02
+echo "35.179.128.255 web-01" >> /etc/hosts
+echo "18.169.158.197 web-02" >> /etc/hosts
+
 cat << 'EOF' > /etc/haproxy/haproxy.cfg
 global
 	log /dev/log	local0
@@ -31,4 +36,3 @@ backend haproxy_balancer_back
 	server web-02 web-02:80 check
 EOF
 service haproxy restart
-
