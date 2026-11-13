@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
 # Installs and configures HAproxy with a roundrobin load balancing algorithm
-
 apt-get update -y
 apt-get install -y haproxy
-
-# Enable HAProxy via the init script
 sudo sed -i 's/^ENABLED=.*/ENABLED=1/' /etc/default/haproxy
-
-# Configure HAProxy frontend and backend
 cat << 'EOF' > /etc/haproxy/haproxy.cfg
 global
 	log /dev/log	local0
@@ -32,8 +27,8 @@ frontend haproxy_balancer_front
 
 backend haproxy_balancer_back
 	balance roundrobin
-	server 7341-web-01 7341-web-01:80 check
-	server 7341-web-02 7341-web-02:80 check
+	server web-01 web-01:80 check
+	server web-02 web-02:80 check
 EOF
-
 service haproxy restart
+
