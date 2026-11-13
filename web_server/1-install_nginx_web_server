@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-# Installs nginx on a new Ubuntu machine, listening on port 80,
-# and serves a page containing "Holberton School" at the root
+# Installs and configures Nginx on a new Ubuntu machine
+
 apt-get update -y
 apt-get install -y nginx
-echo "Holberton School for the win!" > /var/www/html/index.nginx-debian.html
-service nginx restart
+
+echo "Holberton School for the win!" > /var/www/html/index.html
+
+service nginx restart || { pkill nginx; nginx; }
