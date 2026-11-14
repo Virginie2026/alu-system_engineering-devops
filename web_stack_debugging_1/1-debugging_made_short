@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Makes Nginx serve port 80 while init still reports it as not running
 sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
-service nginx restart
+nginx
 rm -f /run/nginx.pid
