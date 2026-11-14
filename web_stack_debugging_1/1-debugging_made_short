@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Makes Nginx listen on port 80 by fixing its config and restarting it directly
+# Makes Nginx serve port 80 while init still reports it as not running
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-pkill nginx
-nginx
+service nginx restart
+rm -f /run/nginx.pid
